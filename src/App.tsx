@@ -1,38 +1,19 @@
-import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
+import { IonApp, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonRouterOutlet, IonTitle, IonToolbar, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Navigate, Route } from 'react-router-dom';
-import Menu from './components/Menu';
-import Page from './pages/Page';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { homeOutline, calculatorOutline, textOutline, gridOutline, videocamOutline } from 'ionicons/icons';
 
-/* Core CSS required for Ionic components to work properly */
+/* CSS básico de Ionic */
 import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
 
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
-
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* import '@ionic/react/css/palettes/dark.always.css'; */
-/* import '@ionic/react/css/palettes/dark.class.css'; */
-import '@ionic/react/css/palettes/dark.system.css';
-
-/* Theme variables */
-import './theme/variables.css';
+/* Importación de las páginas */
+import Inicio from './pages/Inicio';
+import Sumadora from './pages/Sumadora';
+import Traductor from './pages/Traductor';
+import Tabla from './pages/Tabla';
+import Experiencia from './pages/Experiencia';
 
 setupIonicReact();
 
@@ -40,13 +21,52 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu />
-          <IonRouterOutlet id="main">
-            <Route path="/" element={<Navigate to="/folder/Inbox" replace />} />
-            <Route path="/folder/:name" element={<Page />} />
-          </IonRouterOutlet>
-        </IonSplitPane>
+        {/* Menú Lateral */}
+        <IonMenu contentId="main" type="overlay">
+          <IonHeader>
+            <IonToolbar color="primary">
+              <IonTitle>Menú Principal</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent>
+            <IonList>
+              <IonMenuToggle autoHide={false}>
+                <IonItem routerLink="/inicio">
+                  <IonIcon slot="start" icon={homeOutline} />
+                  <IonLabel>Página Inicial</IonLabel>
+                </IonItem>
+                <IonItem routerLink="/sumadora">
+                  <IonIcon slot="start" icon={calculatorOutline} />
+                  <IonLabel>Sumadora</IonLabel>
+                </IonItem>
+                <IonItem routerLink="/traductor">
+                  <IonIcon slot="start" icon={textOutline} />
+                  <IonLabel>Traductor de Números</IonLabel>
+                </IonItem>
+                <IonItem routerLink="/tabla">
+                  <IonIcon slot="start" icon={gridOutline} />
+                  <IonLabel>Tabla de Multiplicar</IonLabel>
+                </IonItem>
+                <IonItem routerLink="/experiencia">
+                  <IonIcon slot="start" icon={videocamOutline} />
+                  <IonLabel>Experiencia Personal</IonLabel>
+                </IonItem>
+              </IonMenuToggle>
+            </IonList>
+          </IonContent>
+        </IonMenu>
+
+        {/* Enrutamiento en React Router v6 */}
+        <IonRouterOutlet id="main">
+          <Routes>
+            <Route path="/inicio" element={<Inicio />} />
+            <Route path="/sumadora" element={<Sumadora />} />
+            <Route path="/traductor" element={<Traductor />} />
+            <Route path="/tabla" element={<Tabla />} />
+            <Route path="/experiencia" element={<Experiencia />} />
+            <Route path="/" element={<Navigate to="/inicio" replace />} />
+          </Routes>
+        </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
   );
