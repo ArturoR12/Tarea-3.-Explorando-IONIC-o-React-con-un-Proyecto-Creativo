@@ -1,8 +1,7 @@
 import { IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
 const Experiencia: React.FC = () => {
-  // Reemplaza esto con el ID de tu video de YouTube subido
-  const videoId = "dQw4w9WgXcQ";
+  const videoId = "S77fgBooqMs";
 
   return (
     <IonPage>
